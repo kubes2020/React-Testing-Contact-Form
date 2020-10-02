@@ -18,14 +18,15 @@ const ContactForm = () => {
     setData(data);
     setShowData(true);
   };
+  //onChange and value in the form work either way
 
-  const handleChange = (e) => {
-    e.persist();
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   e.persist();
+  //   setData({
+  //     ...data,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <div className="App">
@@ -37,8 +38,8 @@ const ContactForm = () => {
             type="text"
             id="firstName"
             placeholder="Edd"
-            onChange={handleChange}
-            value={data.firstName}
+            // onChange={handleChange}
+            // value={data.firstName}
             ref={register({ required: true, minLength: 3 })}
           />
           {errors.firstName && (
@@ -53,8 +54,8 @@ const ContactForm = () => {
             type="text"
             id="lastName"
             placeholder="Burke"
-            onChange={handleChange}
-            value={data.lastName}
+            // onChange={handleChange}
+            // value={data.lastName}
             ref={register({ required: true })}
           />
           {errors.lastName && (
@@ -70,8 +71,8 @@ const ContactForm = () => {
             name="email"
             type="email"
             id="email"
-            onChange={handleChange}
-            value={data.email}
+            // onChange={handleChange}
+            // value={data.email}
             ref={register({ required: true })}
           />
           {errors.email && (

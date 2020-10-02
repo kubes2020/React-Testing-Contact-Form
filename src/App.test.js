@@ -1,8 +1,8 @@
 import React from "react";
-import { render, screen, fireEvent, findByText } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 
-test("renders and inputs work", () => {
+test("renders and inputs work", async () => {
   render(<App />);
 
   const firstNameInput = screen.getByLabelText(/first name/i);
@@ -16,8 +16,17 @@ test("renders and inputs work", () => {
     target: { name: "lastName", value: "Kubes" },
   });
   fireEvent.change(emailInput, { target: { value: "me@me.com" } });
-
+  fireEvent.change(messageInput, {
+    target: { value: "just a simple message" },
+  });
   fireEvent.click(submitButton);
 
-  const checkName = screen.findByText(/brian/i);
+  const checkFirstName = await screen.findByText(/brian/i);
+  expect(checkFirstName).toBeInTheDocument();
+
+  const checkLastName = await screen.findByText(/kubes/i);
+  expect(checkLastName).toBeInTheDocument();
+
+  //all in one option
+  expect(await screen.findByText(/me@me.com/i)).toBeInTheDocument();
 });
